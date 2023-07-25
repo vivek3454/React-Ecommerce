@@ -1,6 +1,6 @@
 // import { useState } from 'react'
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import ProjectListingPage from "./components/ProjectListingPage"
+import ProjectListingPage from "./components/ProductListingPage"
 import Navbar from "./components/Navbar"
 import Category from "./components/Category"
 import Cart from "./components/Cart"
