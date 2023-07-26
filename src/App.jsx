@@ -8,6 +8,7 @@ import ProductDetail from "./components/ProductDetail"
 import Context from "./context/Context"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "./components/Footer"
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route exact path="/cart" element={<Cart />} />
             </Routes>
           </div>
+          <Footer />
         </Context >
       </BrowserRouter>
       <ToastContainer />
