@@ -56,12 +56,12 @@ const CategoryCarousel = ({ products, label, value }) => {
   };
   return (
     <>
-      <h2 className='mt-12 text-4xl font-semibold'>{label}</h2>
+      <h2 className='mt-12 ml-5 text-4xl font-semibold'>{label}</h2>
       <Carousel
         responsive={responsive}
         arrows
         renderArrowsWhenDisabled={false}
-        className=""
+        className="ml-4"
         focusOnSelect={false}
         removeArrowOnDeviceType={["tablet", "mobile"]}
         dotListClass="dotList"
