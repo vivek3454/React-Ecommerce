@@ -9,6 +9,7 @@ import Context from "./context/Context"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/Footer"
+import SearchPage from "./components/SearchPage"
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route exact path="/category" element={<Category />} />
               <Route exact path="/detail/:id" element={<ProductDetail />} />
               <Route exact path="/cart" element={<Cart />} />
+              <Route exact path="/search/:query" element={<SearchPage />} />
             </Routes>
           </div>
           <Footer />
