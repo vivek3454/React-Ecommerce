@@ -6,7 +6,7 @@ import ProductCard from './ProductCard';
 import { categories } from '../data/categories';
 
 const Category = () => {
-  const { products, setProducts } = useContext(AppContext);
+  const { products } = useContext(AppContext);
 
   return (
     <>
@@ -62,7 +62,7 @@ const CategoryCarousel = ({ products, label, value }) => {
         arrows
         renderArrowsWhenDisabled={false}
         className=""
-        focusOnSelect={true}
+        focusOnSelect={false}
         removeArrowOnDeviceType={["tablet", "mobile"]}
         dotListClass="dotList"
       >
