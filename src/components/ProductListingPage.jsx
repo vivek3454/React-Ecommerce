@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import ProductCard from './ProductCard'
 import PulseLoader from "react-spinners/PulseLoader";
 import { AppContext } from '../context/Context';
@@ -6,7 +6,9 @@ import { product } from '../data/products';
 import { categories } from '../data/categories';
 
 const ProjectListingPage = () => {
-    // const [products, setProducts] = useState([]);
+    const [isFilterOpen, setIsFilterOpen] = useState(false);
+    const filterRef = useRef();
+    const filterBtnRef = useRef();
     const { products, setProducts } = useContext(AppContext);
 
     const handleSort = (e) => {
@@ -163,35 +165,57 @@ const ProjectListingPage = () => {
         }
     }
 
+    const handleFilter = () => {
+        setIsFilterOpen(!isFilterOpen);
+    }
+
+    useEffect(() => {
+        const closeFilter = (e) => {
+            if (filterRef.current && !filterRef.current.contains(e.target) && !filterBtnRef.current.contains(e.target)) {
+              setIsFilterOpen(false);
+            }
+          }
+          document.addEventListener('mousedown', closeFilter);
+          return () => {
+            document.removeEventListener('mousedown', closeFilter);
+          }
+    })
+    
+
 
     return (
-        <><div className='h-[91vh] flex'>
-            <div className='w-[20%] py-10 border-[#ccc] overflow-auto border-r-2 h-full sticky top-9'>
-                <h2 className='text-center text-xl font-semibold mb-3'>Filter</h2>
-                <div className='flex flex-col pl-24 gap-1 border-b-2 pb-2 ' onClick={handleSort}>
-                    {
-                        categories.map((categorie) => (
-                            <button key={categorie.label} value={categorie.value} className='border-white transition-colors w-max hover:border-black border-b-2'>{categorie.label}</button>
-                        ))
-                    }
+        <>
+            <div className='h-[91vh] flex'>
+                <div ref={filterRef} className={`w-[15%] max-[1280px]:w-40 min-[1280px]:block ${isFilterOpen ? 'block' : 'hidden'} py-10 max-[1280px]:absolute max-[1280px]:top-32 max-[1280px]:h-96 max-[1280px]:left-8 z-50 bg-white border-[#ccc] overflow-auto max-[1280px]:shadow-lg max-[1280px]:border-0 border-r-2 h-full sticky top-9`}>
+                    <h2 className='text-center text-xl font-semibold mb-3'>Filter</h2>
+                    <div className='flex flex-col pl-10 max-[1280px]:pl-4 gap-1 border-b-2 pb-2 ' onClick={handleSort}>
+                        {
+                            categories.map((categorie) => (
+                                <button key={categorie.label} value={categorie.value} className='border-white transition-colors w-max hover:border-black border-b-2'>{categorie.label}</button>
+                            ))
+                        }
 
-                </div>
-            </div>
-            <div className='w-[80%] h-full overflow-auto scrollbar'>
-                <div className='text-right sticky top-0 bg-white z-10 px-[36px] py-7'>
-                    {/* <button onClick={handleSort} className='bg-blue-500 hover:bg-blue-600 px-2 py-1 rounded text-white'>Filter</button> */}
-
-                    <div>
-                        <span className='font-semibold'>Price :</span>
-                        <select onChange={handleChange} defaultValue={'all'} className='ml-3 border-2 border-black'>
-                            {/* <option value="all">all</option> */}
-                            <option value="low-high">lowest to highest</option>
-                            <option value="high-low">highest to lowest</option>
-                        </select>
                     </div>
                 </div>
-                <div>
-                    <div className='pb-24 pt-5 flex shrink-0 flex-wrap'>
+                <div className='w-[85%] max-[1280px]:w-full h-full overflow-y-auto'>
+                    <div className='flex justify-end max-[1280px]:justify-between sticky top-0 bg-white z-10 px-[36px] py-7'>
+                        {/* <button onClick={handleSort} className='bg-blue-500 hover:bg-blue-600 px-2 py-1 rounded text-white'>Filter</button> */}
+
+                        <div onClick={handleFilter} className='min-[1280px]:hidden' ref={filterBtnRef}>
+                            <button className='bg-blue-500 hover:bg-blue-600 px-2 py-1 rounded text-white'>Filter</button>
+                        </div>
+                        <div>
+                            {/* <span className='font-semibold block bg-red-400'>Price :</span> */}
+                            <select onChange={handleChange} defaultValue={'select'} className='ml-3 border-2 border-black'>
+                                {/* <option value="all">all</option> */}
+                                <option value="select">Price</option>
+                                <option value="low-high">lowest to highest</option>
+                                <option value="high-low">highest to lowest</option>
+                            </select>
+                        </div>
+                    </div>
+                    {/* <div> */}
+                    <div className='pb-24 pt-5 grid place-items-center gap-5 grid-cols-[repeat(auto-fit,minmax(250px,1fr))]'>
                         {
                             products.map((product) => (
                                 <ProductCard
@@ -208,10 +232,10 @@ const ProjectListingPage = () => {
 
                         }
                     </div>
-                </div>
+                    {/* </div> */}
 
+                </div>
             </div>
-        </div>
         </>
     )
 }
