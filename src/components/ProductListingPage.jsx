@@ -1,13 +1,15 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import ProductCard from './ProductCard'
-import PulseLoader from "react-spinners/PulseLoader";
+// import PulseLoader from "react-spinners/PulseLoader";
 import { AppContext } from '../context/Context';
 import { product } from '../data/products';
 import { categories } from '../data/categories';
+import { FaStar } from 'react-icons/fa'
 
 const ProjectListingPage = () => {
+    // const [stars, setStars] = useState([0, 0, 0, 0, 0]);
     const [isFilterOpen, setIsFilterOpen] = useState(false);
-    const [isChecked, setIsChecked] = useState({ 'Apple': true, 'Samsung': true, 'OPPO': true, 'Huawei': true, 'Infinix': true, 'Impression of Acqua Di Gio': true, 'Royal_Mirage': true, 'Fog Scent Xpressio': true, 'Al Munakh': true, 'Lord - Al-Rehab': true, 'L\'Oreal Paris': true, 'Hemani Tea': true, 'Dermive': true, 'ROREC White Rice': true, 'Fair & Clear': true,'Saaf & Khaas': true, 'Bake Parlor Big': true, 'Baking Food Items': true, 'fauji': true, 'Dry Rose': true,'Furniture Bed Set':true });
+    const [isChecked, setIsChecked] = useState({ 'Apple': true, 'Samsung': true, 'OPPO': true, 'Huawei': true, 'Infinix': true, 'Impression of Acqua Di Gio': true, 'Royal_Mirage': true, 'Fog Scent Xpressio': true, 'Al Munakh': true, 'Lord - Al-Rehab': true, 'L\'Oreal Paris': true, 'Hemani Tea': true, 'Dermive': true, 'ROREC White Rice': true, 'Fair & Clear': true, 'Saaf & Khaas': true, 'Bake Parlor Big': true, 'Baking Food Items': true, 'fauji': true, 'Dry Rose': true, 'Furniture Bed Set': true });
 
     const [afterFilterSelected, setAfterFilterSelected] = useState({ 'Smartphones': false, 'Laptops': false, 'Fragrances': false, 'Skincare': false, 'Groceries': false, 'HomeDecoration': false, 'Furniture': false, 'Tops': false, 'Lighting': false, 'Sunglasses': false, 'Automotive': false, 'Motorcycle': false });
     const filterRef = useRef();
@@ -15,7 +17,7 @@ const ProjectListingPage = () => {
     const { products, setProducts } = useContext(AppContext);
 
 
-    const handleMultiSelectResult = ()=> {
+    const handleMultiSelectResult = () => {
         if (afterFilterSelected.Smartphones) {
             let allProducts = [];
             if (isChecked.Apple) {
@@ -276,7 +278,7 @@ const ProjectListingPage = () => {
         }
 
 
-    
+
     }
     useEffect(() => {
         handleMultiSelectResult();
@@ -462,13 +464,61 @@ const ProjectListingPage = () => {
         }
     })
 
+    const [currentValue, setCurrentValue] = useState(0);
+    const [hoverValue, setHoverValue] = useState(undefined);
+    const stars = Array(5).fill(0)
+
+    const handleClick = value => {
+        setCurrentValue(value)
+    }
+
+    const handleMouseOver = newHoverValue => {
+        setHoverValue(newHoverValue)
+    };
+
+    const handleMouseLeave = () => {
+        setHoverValue(undefined)
+    }
+
+    useEffect(() => {
+        if (currentValue > 0) {
+
+            const filteredProduct = product.filter((item) => {
+                return item.rating <= currentValue;
+            })
+
+            setProducts(filteredProduct);
+        }
+
+    }, [currentValue])
+
 
 
     return (
         <>
             <div className='h-[91vh] flex'>
                 <div ref={filterRef} className={`w-[15%] max-[1280px]:w-40 min-[1280px]:block ${isFilterOpen ? 'block' : 'hidden'} py-10 max-[1280px]:absolute max-[1280px]:top-32 max-[1280px]:h-96 max-[1280px]:left-8 z-50 bg-white border-[#ccc] overflow-auto max-[1280px]:shadow-lg max-[1280px]:border-0 border-r-2 h-full sticky top-9`}>
-                    <h2 className='text-center text-xl font-semibold mb-3'>Filter</h2>
+                    <h2 className='text-center text-2xl font-semibold mb-3'>Filter</h2>
+                    <h3 className='text-center text-lg -mb-4 font-serif'>Rating</h3>
+                    <div className='flex justify-center gap-3 mt-1 py-5'>
+
+                        {stars.map((_, index) => {
+                            return (
+                                <FaStar
+                                    key={index}
+                                    size={20}
+                                    onClick={() => handleClick(index + 1)}
+                                    onMouseOver={() => handleMouseOver(index + 1)}
+                                    onMouseLeave={handleMouseLeave}
+                                    color={(hoverValue || currentValue) > index ? 'green' : 'gray'}
+                                    style={{
+                                        cursor: "pointer"
+                                    }}
+                                />
+                            )
+                        })}
+                    </div>
+                    <h3 className='text-center text-lg font-serif'>Category</h3>
                     <div className='flex flex-col pl-10 max-[1280px]:pl-4 gap-1 border-b-2 pb-2 ' >
                         {
                             categories.map((category) => (
@@ -491,7 +541,6 @@ const ProjectListingPage = () => {
                                 </div>
                             ))
                         }
-
                     </div>
                 </div>
                 <div className='w-[85%] max-[1280px]:w-full h-full overflow-y-auto'>
