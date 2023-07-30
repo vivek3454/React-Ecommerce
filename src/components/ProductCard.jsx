@@ -6,19 +6,7 @@ import { toast } from 'react-toastify';
 const ProductCard = (props) => {
     const {cart, setCart, addToCart} = useContext(AppContext);
     const { category, description, id, image, price, rating, title } = props;
-    // const addToCart = (product)=>{
-    //     setCart([...cart, {...product,quantity: 1}]);
-    //     toast.success("Successfull added to Cart.", {
-    //         position: "top-center",
-    //         autoClose: 1500,
-    //         hideProgressBar: true,
-    //         closeOnClick: false,
-    //         pauseOnHover: false,
-    //         draggable: false,
-    //         theme: "light",
-    //       });
 
-    // }
     return (
         <>
         <div className="flex flex-col m-4 border-2 w-64 p-4 relative">
