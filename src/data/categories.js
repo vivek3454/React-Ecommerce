@@ -2,106 +2,106 @@ export const categories = [
     {
       "value": "all",
       "label": "All",
-      "checked": false
+      "brands": []
     },
     {
       "value": "smartphones",
       "label": "Smartphones",
-      "checked": false
+      "brands": ["Apple","Samsung", "OPPO", "Huawei"]
     },
     {
       "value": "laptops",
       "label": "Laptops",
-      "checked": false
+      "brands": ["Apple","Samsung","Infinix"]
     },
     {
       "value": "fragrances",
       "label": "Fragrances",
-      "checked": false
+      "brands": ['Impression of Acqua Di Gio', 'Royal_Mirage', 'Fog Scent Xpressio', 'Al Munakh', 'Lord - Al-Rehab']
     },
     {
       "value": "skincare",
       "label": "Skincare",
-      "checked": false
+      "brands": ["L'Oreal Paris", 'Hemani Tea', 'Dermive', 'ROREC White Rice', 'Fair & Clear']
     },
     {
       "value": "groceries",
       "label": "Groceries",
-      "checked": false
+      "brands": ['Saaf & Khaas', 'Bake Parlor Big', 'Baking Food Items', 'fauji', 'Dry Rose']
     },
     {
       "value": "home-decoration",
       "label": "Home Decoration",
-      "checked": false
+      "brands": ['Boho Decor', 'Flying Wooden', 'LED Lights', 'luxury palace', 'Golden']
     },
     {
       "value": "furniture",
       "label": "Furniture",
-      "checked": false
+      "brands": ['Furniture Bed Set', 'Ratttan Outdoor', 'Kitchen Shelf', 'Multi Purpose', 'AmnaMart']
     },
     {
       "value": "tops",
       "label": "Tops",
-      "checked": false
+      "brands": ['Professional Wear', 'Soft Cotton', 'Top Sweater']
     },
     {
       "value": "womens-dresses",
       "label": "Womens Dresses",
-      "checked": false
+      "brands": ['RED MICKY MOUSE..', 'Digital Printed', 'Ghazi Fabric', 'Ghazi Fabric', 'IELGY']
     },
     {
       "value": "womens-shoes",
       "label": "Womens Shoes",
-      "checked": false
+      "brands": ['IELGY fashion', 'Synthetic Leather', 'Sandals Flip Flops', 'Maasai Sandals', 'Arrivals Genuine']
     },
     {
       "value": "mens-shirts",
       "label": "Mens Shirts",
-      "checked": false
+      "brands": ['Vintage Apparel', 'FREE FIRE', 'Vintage Apparel', 'The Warehouse', 'The Warehouse']
     },
     {
       "value": "mens-shoes",
       "label": "Mens Shoes",
-      "checked": false
+      "brands": ['Sneakers', 'Rubber', 'The Warehouse', 'Sneakers', 'Sneakers']
     },
     {
       "value": "mens-watches",
       "label": "Mens Watches",
-      "checked": false
+      "brands": ['Naviforce', 'SKMEI 9117', 'SKMEI 9117', 'Strap Skeleton', 'Stainless']
     },
     {
       "value": "womens-watches",
       "label": "Womens Watches",
-      "checked": false
+      "brands": ['Eastern Watches', 'Eastern Watches', 'Luxury Digital', 'Watch Pearls', 'Bracelet']
     },
     {
       "value": "womens-bags",
       "label": "Womens Bags",
-      "checked": false
+      "brands": ['LouisWill', 'Bracelet', 'Copenhagen Luxe', 'Steal Frame']
     },
     {
       "value": "womens-jewellery",
       "label": "Womens jewellery",
-      "checked": false
+      "brands": ['Darojay', 'Copenhagen Luxe', 'Fashion Jewellery', 'Cuff Butterfly']
     },
     {
       "value": "sunglasses",
       "label": "Sunglasses",
-      "checked": false
+      "brands": ['Designer Sun Glasses', 'mastar watch', 'LouisWill']
     },
     {
       "value": "automotive",
       "label": "Automotive",
-      "checked": false
+      "brands": ['Car Aux', 'W1209 DC12V', 'TC Reusable', 'Neon LED Light']
     },
     {
       "value": "motorcycle",
       "label": "Motorcycle",
-      "checked": false
+      "brands": ['METRO 70cc Motorcycle - MR70', 'BRAVE BULL', 'shock absorber', 'JIEPOLLY', 'Xiangle']
     },
     {
       "value": "lighting",
       "label": "Lighting",
-      "checked": false
+      "brands": ['lightingbrilliance', 'Ifei Home', 'DADAWU', 'YIOSI']
     }
   ]
