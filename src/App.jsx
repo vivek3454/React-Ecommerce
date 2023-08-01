@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/Footer"
 import SearchPage from "./components/SearchPage"
+import Home from "./components/Home"
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
           <Navbar />
           <div>
             <Routes>
-              <Route exact path="/" element={<ProjectListingPage />} />
+              <Route exact path="/" element={<Home />} />
+              <Route exact path="/products" element={<ProjectListingPage />} />
               <Route exact path="/category" element={<Category />} />
               <Route exact path="/detail/:id" element={<ProductDetail />} />
               <Route exact path="/cart" element={<Cart />} />

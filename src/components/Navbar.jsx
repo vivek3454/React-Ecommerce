@@ -16,7 +16,6 @@ const Navbar = () => {
         setIsOpenSearch(false);
     }
     const handleSearchShowHide = () => {
-        console.log(document.getElementById('search').focus())
         setIsOpenSearch(!isOpenSearch);
         setIsOpen(false);
     }
@@ -86,6 +85,9 @@ const Navbar = () => {
                 <ul ref={navRef} className={`max-[789px]:w-full gap-5 max-[789px]:gap-2 max-[789px]:bg-blue-500 max-[789px]:px-10 max-[789px]:absolute top-16 left-0 right-0 min-[789px]:static ${isOpen ? 'flex' : 'hidden'} min-[789px]:flex max-[789px]:flex-col max-[789px]:justify-center text-lg`}>
                     <Link to={'/'}>
                         <li className={`${pathname === '/' ? 'text-white' : 'text-gray-300'}`}>Home</li>
+                    </Link>
+                    <Link to={'/products'}>
+                        <li className={`${pathname === '/products' ? 'text-white' : 'text-gray-300'}`}>Products</li>
                     </Link>
                     <Link to={'/category'}>
                         <li className={`${pathname === '/category' ? 'text-white' : 'text-gray-300'}`}>Category</li>
