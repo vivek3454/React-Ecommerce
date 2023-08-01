@@ -117,7 +117,6 @@ const ProjectListingPage = () => {
         }
         else {
             setProducts(product);
-            //   setIsLoading(false)
         }
     }, [allCategories, allBrands])
 
@@ -272,8 +271,9 @@ const ProjectListingPage = () => {
                                         title={product.title}
                                         price={product.price}
                                         description={product.description}
-                                        image={product.images[0]}
+                                        image={product.thumbnail}
                                         rating={product.rating}
+                                        discount={product.discountPercentage}
                                     />
                                 )) :
                                 (

@@ -5,11 +5,12 @@ import { toast } from 'react-toastify';
 
 const ProductCard = (props) => {
     const {cart, setCart, addToCart} = useContext(AppContext);
-    const { category, description, id, image, price, rating, title } = props;
+    const { category, discount, id, image, price, rating, title } = props;
 
     return (
         <>
         <div className="flex flex-col m-4 border-2 w-64 p-4 relative">
+            <span className='text-black text-sm bg-yellow-400 rounded px-1 absolute top-1 right-1'>{discount}% off</span>
             <Link to={`/detail/${id}`}>
                 <div className="flex justify-center rounded">
                     <img alt="ecommerce" className="object-contain w-40 h-40" src={image} />
@@ -28,7 +29,7 @@ const ProductCard = (props) => {
                 <h2 className="text-gray-900 title-font text-lg line-clamp-1 font-medium">{title}</h2>
                 <p className="mt-4 flex justify-between items-center">
                     ${price}
-                    <button onClick={()=> addToCart(props)} className='bg-blue-500 hover:bg-blue-600 px-2 py-1 rounded text-white'>Add to Cart</button>
+                    <button onClick={()=> addToCart(props)} className='bg-blue-500 hover:shadow-xl px-2 py-1 rounded text-white'>Add to Cart</button>
                 </p>
             </div>
         </div>
