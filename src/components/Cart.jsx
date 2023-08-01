@@ -31,7 +31,6 @@ const Cart = () => {
     for (const product of cart) {
       all += Number(product.itemTotal);
     }
-    console.log(all);
     setSubTotal(all);
   }, [cart])
 
@@ -47,6 +46,18 @@ const Cart = () => {
       draggable: false,
       theme: "light",
     });
+  }
+  const checkOutHandler = () => {
+    toast.success("Successfull Checkout done.", {
+      position: "top-center",
+      autoClose: 15000,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      theme: "light",
+    });
+    setCart([]);
   }
   return (
     <>
@@ -80,14 +91,15 @@ const Cart = () => {
               <p className='font-semibold text-lg'>SubTotal : {subTotal}$</p>
               <p className='font-semibold text-lg'>Tax : 20$</p>
               <p className='font-semibold text-lg'>Total : {subTotal === 0 ? 0 : subTotal + 20}$</p>
+              <button className='w-28 h-8 bg-black text-white rounded-md hover:bg-gray-600 text-lg' onClick={checkOutHandler}>Checkout</button>
+
             </div>
           </div>
-          {/* {cart.length === 0 && <h1>Cart is empty</h1>} */}
         </div>
         :
         <div className=' h-[78vh] flex flex-col items-center justify-center'>
           <h1 className='font-semibold text-2xl'>Cart is empty</h1>
-          <Link to='/' className='text-sky-500 flex gap-3'>Go to Shop <FaArrowRight className='mt-[5px]' /></Link>
+          <Link to='/products' className='text-sky-500 flex gap-3'>Go to Shop <FaArrowRight className='mt-[5px]' /></Link>
         </div>
       }
     </>
@@ -97,9 +109,9 @@ const Cart = () => {
 
 const CartItem = ({ category, itemTotal, description, id, image, price, rating, title, quantity, decrement, increment, index, deleteHandler }) => (
   <div className='bg-white border-b-2 border-black rounded-[4px] my-8 px-4 grid grid-cols-[2fr_1fr_1fr_2fr] max-[820px]:grid-cols-[2fr_1fr_1fr_1fr] max-[420px]:grid-cols-2 items-center'>
-    <div className='flex items-center gap-3 max-[600px]:flex-col max-[450px]:gap-0'>
+    <div className='flex items-center justify-center gap-3 max-[600px]:flex-col max-[450px]:gap-0'>
       <img className='w-[100px] h-[100px] object-contain' src={image} alt="Item" />
-      <article className='flex flex-col items-start'>
+      <article className='flex flex-col items-start max-[600px]:-mt-5'>
         <h3 className='font-semibold text-center max-[380px]:text-xs'>{title}</h3>
         <p className='text-center'>${price}</p>
       </article>
