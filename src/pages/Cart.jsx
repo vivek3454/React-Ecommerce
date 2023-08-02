@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import CartItem from '../components/CartItem';
 
 const Cart = () => {
-  const { cart, setCart, subTotal, setSubTotal, isLogin } = useContext(AppContext);
+  const { cart, setCart, subTotal, setSubTotal, isLogin, setIsLogin } = useContext(AppContext);
   const navigate = useNavigate();
 
   const decrement = ( index) => {
@@ -65,7 +65,9 @@ const Cart = () => {
   }
 
   useEffect(() => {
-    if(!isLogin){
+    let value = sessionStorage.getItem('isLogin');
+    setIsLogin(value);
+    if (!value) {
       navigate('/signin');
     }
   }, [])
