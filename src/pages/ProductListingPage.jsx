@@ -94,8 +94,8 @@ const ProjectListingPage = () => {
         if (allCategories.length !== 0) {
             if (currentValue > 0) {
                 for (const selectedOption of allCategories) {
-                    let Cards = products.filter((item) => {
-                        return item.category === selectedOption;
+                    let Cards = product.filter((item) => {
+                        return item.category === selectedOption && item.rating <= currentValue;
                     });
                     filteredCategoriesCards = [...filteredCategoriesCards, ...Cards];
                 }
@@ -115,22 +115,34 @@ const ProjectListingPage = () => {
 
         }
         else {
-            setProducts(product);
+            if (currentValue > 0) {
+                let Cards = product.filter((item) => {
+                    return item.rating <= currentValue;
+                });
+                filteredCategoriesCards = [...filteredCategoriesCards, ...Cards];
+
+                setProducts(filteredCategoriesCards);
+            }
+            // if (allBrands.length === 0) {
+            //     setProducts(product);
+            // }
         }
-    }, [allCategories, allBrands])
+    }, [allCategories, allBrands, currentValue])
 
 
     useEffect(() => {
         let filteredBrandsCards = [];
         if (allBrands.length !== 0) {
             if (allCategories.length !== 0) {
+                if (currentValue > 0) {
 
-                for (const selectedOption of allCategories) {
-                    for (const singleBrand of allBrands) {
-                        let Cards = product.filter((item) => {
-                            return item.category === selectedOption && item.brand === singleBrand;
-                        });
-                        filteredBrandsCards = [...filteredBrandsCards, ...Cards];
+                    for (const selectedOption of allCategories) {
+                        for (const singleBrand of allBrands) {
+                            let Cards = product.filter((item) => {
+                                return item.category === selectedOption && item.brand === singleBrand && item.rating <= currentValue;
+                            });
+                            filteredBrandsCards = [...filteredBrandsCards, ...Cards];
+                        }
                     }
                 }
             }
@@ -138,8 +150,8 @@ const ProjectListingPage = () => {
                 if (currentValue > 0) {
 
                     for (const singleBrand of allBrands) {
-                        let Cards = products.filter((item) => {
-                            return item.brand === singleBrand;
+                        let Cards = product.filter((item) => {
+                            return item.brand === singleBrand && item.rating <= currentValue;
                         });
                         filteredBrandsCards = [...filteredBrandsCards, ...Cards];
                     }
@@ -156,7 +168,7 @@ const ProjectListingPage = () => {
             }
             setProducts(filteredBrandsCards);
         }
-    }, [allBrands])
+    }, [allBrands, allCategories, currentValue])
 
 
     useEffect(() => {
@@ -173,12 +185,14 @@ const ProjectListingPage = () => {
 
     useEffect(() => {
         if (currentValue > 0) {
-
-            const filteredProduct = products.filter((item) => {
-                return item.rating <= currentValue;
-            })
-
-            setProducts(filteredProduct);
+            if (allBrands.length === 0) {
+                if (allCategories.length === 0) {
+                    const filteredProduct = product.filter((item) => {
+                        return item.rating <= currentValue;
+                    })
+                    setProducts(filteredProduct);
+                }
+            }
         }
 
     }, [currentValue])
