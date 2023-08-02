@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { FaBars, FaPhone, FaSearch, FaTimes } from 'react-icons/fa'
-import { AppContext } from '../context/Context'
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { FaBars, FaSearch, FaTimes } from 'react-icons/fa';
+import { AppContext } from '../context/Context';
 
 const Navbar = () => {
     const { pathname } = useLocation();
@@ -28,7 +28,7 @@ const Navbar = () => {
     }
     const handleLogout = () => {
         let userinput = prompt('Are you sure to logout y/n');
-        if(userinput === 'y'){
+        if (userinput === 'y') {
             sessionStorage.clear();
             setIsLogin(false);
             navigate('/signin');

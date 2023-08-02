@@ -67,4 +67,4 @@ const CategoryCarousel = ({ products, label, value }) => {
     )
 }
 
-export default CategoryCarousel;
+export default CategoryCarousel

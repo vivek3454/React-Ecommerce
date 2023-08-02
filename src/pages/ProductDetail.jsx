@@ -1,24 +1,23 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AppContext } from '../context/Context';
 import { product } from '../data/products';
-import ProductCard from './ProductCard';
 
 const ProductDetail = () => {
     const { id } = useParams();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const { addToCart } = useContext(AppContext);
     const [singlProduct, setSingleProduct] = useState({});
     const [image, setImage] = useState('');
     useEffect(() => {
         const filteredProduct = product[id - 1];
-        setImage(filteredProduct.images[0])
+        setImage(filteredProduct.images[0]);
         setSingleProduct(filteredProduct);
     }, [id])
 
 
     const handleImg = (src) => {
-        setImage(src)
+        setImage(src);
     }
 
     return (
@@ -60,7 +59,8 @@ const ProductDetail = () => {
 
                         </div>
                     </div>
-                </section>}
+                </section>
+            }
         </>
     )
 }

@@ -3,7 +3,7 @@ import { AppContext } from '../context/Context';
 import { FaArrowRight } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
-import CartItem from './CartItem';
+import CartItem from '../components/CartItem';
 
 const Cart = () => {
   const { cart, setCart, subTotal, setSubTotal, isLogin } = useContext(AppContext);

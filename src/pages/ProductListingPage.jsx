@@ -1,11 +1,10 @@
-import { useContext, useEffect, useRef, useState } from 'react'
-import ProductCard from './ProductCard'
-// import PulseLoader from "react-spinners/PulseLoader";
+import { useContext, useEffect, useRef, useState } from 'react';
+import ProductCard from '../components/ProductCard';
 import { AppContext } from '../context/Context';
 import { product } from '../data/products';
 import { categories } from '../data/categories';
 import { brands } from '../data/brands';
-import { FaStar, FaAngleDown, FaAngleUp } from 'react-icons/fa'
+import { FaStar, FaAngleDown } from 'react-icons/fa';
 
 const ProjectListingPage = () => {
     const { products, setProducts } = useContext(AppContext);
@@ -15,7 +14,7 @@ const ProjectListingPage = () => {
     const [currentValue, setCurrentValue] = useState(0);
     const [hoverValue, setHoverValue] = useState(undefined);
     const [checkboxShowHide, setCheckboxShowHide] = useState({ categoryCheckbox: false, brandsCheckbox: false });
-    const stars = Array(5).fill(0)
+    const stars = Array(5).fill(0);
     const filterRef = useRef();
     const filterBtnRef = useRef();
 
@@ -63,30 +62,30 @@ const ProjectListingPage = () => {
     }
 
     const handleClick = value => {
-        setCurrentValue(value)
+        setCurrentValue(value);
     }
 
     const handleMouseOver = newHoverValue => {
-        setHoverValue(newHoverValue)
-    };
+        setHoverValue(newHoverValue);
+    }
 
     const handleMouseLeave = () => {
-        setHoverValue(undefined)
+        setHoverValue(undefined);
     }
 
     const handleCategoryCheckboxShowHide = () => {
-        setCheckboxShowHide({ ...checkboxShowHide, categoryCheckbox: !checkboxShowHide.categoryCheckbox })
+        setCheckboxShowHide({ ...checkboxShowHide, categoryCheckbox: !checkboxShowHide.categoryCheckbox });
     }
 
     const handleBrandsCheckboxShowHide = () => {
-        setCheckboxShowHide({ ...checkboxShowHide, brandsCheckbox: !checkboxShowHide.brandsCheckbox })
+        setCheckboxShowHide({ ...checkboxShowHide, brandsCheckbox: !checkboxShowHide.brandsCheckbox });
     }
 
     const handleFiltersReset = () => {
         setProducts(product);
         setCurrentValue(0);
-        setAllBrands([])
-        setAllCategories([])
+        setAllBrands([]);
+        setAllCategories([]);
     }
 
 
@@ -96,7 +95,7 @@ const ProjectListingPage = () => {
             if (currentValue > 0) {
                 for (const selectedOption of allCategories) {
                     let Cards = products.filter((item) => {
-                        return item.category === selectedOption
+                        return item.category === selectedOption;
                     });
                     filteredCategoriesCards = [...filteredCategoriesCards, ...Cards];
                 }
@@ -106,7 +105,7 @@ const ProjectListingPage = () => {
             else {
                 for (const selectedOption of allCategories) {
                     let Cards = product.filter((item) => {
-                        return item.category === selectedOption
+                        return item.category === selectedOption;
                     });
                     filteredCategoriesCards = [...filteredCategoriesCards, ...Cards];
                 }
@@ -129,7 +128,7 @@ const ProjectListingPage = () => {
                 for (const selectedOption of allCategories) {
                     for (const singleBrand of allBrands) {
                         let Cards = product.filter((item) => {
-                            return item.category === selectedOption && item.brand === singleBrand
+                            return item.category === selectedOption && item.brand === singleBrand;
                         });
                         filteredBrandsCards = [...filteredBrandsCards, ...Cards];
                     }
@@ -140,7 +139,7 @@ const ProjectListingPage = () => {
 
                     for (const singleBrand of allBrands) {
                         let Cards = products.filter((item) => {
-                            return item.brand === singleBrand
+                            return item.brand === singleBrand;
                         });
                         filteredBrandsCards = [...filteredBrandsCards, ...Cards];
                     }
@@ -148,7 +147,7 @@ const ProjectListingPage = () => {
                 else {
                     for (const singleBrand of allBrands) {
                         let Cards = product.filter((item) => {
-                            return item.brand === singleBrand
+                            return item.brand === singleBrand;
                         });
                         filteredBrandsCards = [...filteredBrandsCards, ...Cards];
                     }

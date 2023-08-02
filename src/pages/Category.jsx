@@ -2,7 +2,7 @@ import React from 'react';
 import "react-multi-carousel/lib/styles.css";
 import { categories } from '../data/categories';
 import { product } from '../data/products';
-import CategoryCarousel from './CategoryCarousel';
+import CategoryCarousel from '../components/CategoryCarousel';
 
 const Category = () => {
 
@@ -27,4 +27,4 @@ const Category = () => {
   )
 }
 
-export default Category;
+export default Category

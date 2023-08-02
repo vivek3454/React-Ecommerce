@@ -1,21 +1,20 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { AppContext } from '../context/Context';
-import { Link } from 'react-router-dom';
 
 const SignIn = () => {
-    const {setIsLogin} = useContext(AppContext);
-    const navigate = useNavigate()
+    const { setIsLogin } = useContext(AppContext);
+    const navigate = useNavigate();
     const [userInfo, setUserInfo] = useState({ email: "", password: "" });
     const [testUserInfo] = useState({ email: "testuser@gmail.com", password: "testuser@01082023" });
-    const [errorMessage, setErrorMessage] = useState('')
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleOnChange = (e) => {
         setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
     }
     const handleTestUser = () => {
-        setUserInfo({email: testUserInfo.email, password: testUserInfo.password})
-        setErrorMessage('')
+        setUserInfo({ email: testUserInfo.email, password: testUserInfo.password });
+        setErrorMessage('');
     }
 
     const handleFormSubmit = (e) => {
@@ -23,10 +22,10 @@ const SignIn = () => {
         if (testUserInfo.email === userInfo.email && testUserInfo.password === userInfo.password) {
             setIsLogin(true);
             sessionStorage.setItem('isLogin', true);
-            navigate('/')
+            navigate('/');
         }
-        else{
-            setErrorMessage('Please use test user')
+        else {
+            setErrorMessage('Please use test user');
         }
     }
 
@@ -49,9 +48,9 @@ const SignIn = () => {
                     </div>
 
                 </form>
-                    <div className="mt-4 text-center">
-                        <button onClick={handleTestUser} className="text-white bg-[#4CB5F9] active:bg-[#4CB5F9] border-0 py-1 px-8 focus:outline-none hover:bg-[#369fe6] rounded-xl text-lg">Test user</button>
-                    </div>
+                <div className="mt-4 text-center">
+                    <button onClick={handleTestUser} className="text-white bg-[#4CB5F9] active:bg-[#4CB5F9] border-0 py-1 px-8 focus:outline-none hover:bg-[#369fe6] rounded-xl text-lg">Test user</button>
+                </div>
             </div>
         </section>
     )
