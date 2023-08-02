@@ -44,15 +44,6 @@ const Context = (props) => {
   }, [])
 
 
-
-  useEffect(() => {
-    let value = sessionStorage.getItem('isLogin');
-    setIsLogin(value);
-    if (!value) {
-      navigate('/signin');
-    }
-  }, [])
-
   return (
     <AppContext.Provider value={{ cart, setCart, products, setProducts, subTotal, setSubTotal, addToCart, isLogin, setIsLogin }}>
       {props.children}
