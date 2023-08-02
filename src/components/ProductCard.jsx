@@ -3,14 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/Context';
 
 const ProductCard = ({ category, discount, id, image, price, rating, title }) => {
-    const {cart, setCart, addToCart, isLogin} = useContext(AppContext);
+    const {addToCart, isLogin} = useContext(AppContext);
     const navigate = useNavigate();
     const handleAddToCart = ()=>{
         if (!isLogin) {
             navigate('/signin');
         }
         else{
-            addToCart(props);
+            addToCart({ category, discount, id, image, price, rating, title });
         }
     }
 
