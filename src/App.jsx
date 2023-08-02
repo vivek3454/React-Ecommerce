@@ -1,4 +1,3 @@
-// import { useState } from 'react'
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import ProjectListingPage from "./components/ProductListingPage"
 import Navbar from "./components/Navbar"
@@ -11,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/Footer"
 import SearchPage from "./components/SearchPage"
 import Home from "./components/Home"
+import SignIn from "./components/SignIn"
 
 function App() {
   return (
@@ -21,6 +21,7 @@ function App() {
           <div>
             <Routes>
               <Route exact path="/" element={<Home />} />
+              <Route exact path="/signin" element={<SignIn />} />
               <Route exact path="/products" element={<ProjectListingPage />} />
               <Route exact path="/category" element={<Category />} />
               <Route exact path="/detail/:id" element={<ProductDetail />} />
