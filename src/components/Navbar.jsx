@@ -1,16 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Link, useLocation, useNavigate, useNavigation } from 'react-router-dom'
-import { FaBars, FaPhone, FaSearch, FaTimes } from 'react-icons/fa';
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { FaBars, FaPhone, FaSearch, FaTimes } from 'react-icons/fa'
+import { AppContext } from '../context/Context'
 
 const Navbar = () => {
     const { pathname } = useLocation();
     const navigate = useNavigate();
+    const { isLogin, setIsLogin } = useContext(AppContext);
     const searchInputBoxRef = useRef();
     const navRef = useRef();
     const barRef = useRef();
     const [isOpen, setIsOpen] = useState(false);
     const [isOpenSearch, setIsOpenSearch] = useState(false);
     const [searchValue, setSearchValue] = useState('');
+
     const handleNavbarShowHide = () => {
         setIsOpen(!isOpen);
         setIsOpenSearch(false);
@@ -23,39 +26,47 @@ const Navbar = () => {
         const value = e.target.value;
         setSearchValue(value);
     }
+    const handleLogout = () => {
+        let userinput = prompt('Are you sure to logout y/n');
+        if(userinput === 'y'){
+            sessionStorage.clear();
+            setIsLogin(false);
+            navigate('/signin');
+        }
+    }
     const handleSearch = () => {
         if (searchValue !== '') {
-            navigate(`/search/${searchValue}`)
-            setSearchValue('')
+            navigate(`/search/${searchValue}`);
+            // setSearchValue('')
         }
     }
 
     useEffect(() => {
         const closeSearchBar = (e) => {
-          if (!searchInputBoxRef.current.contains(e.target)) {
-            setIsOpenSearch(false);
-          }
+            if (!searchInputBoxRef.current.contains(e.target)) {
+                setIsOpenSearch(false);
+            }
         }
         const closeNav = (e) => {
-          if (!navRef.current.contains(e.target) && !barRef.current.contains(e.target)) {
-            setIsOpen(false);
-          }
+            if (!navRef.current.contains(e.target) && !barRef.current.contains(e.target)) {
+                setIsOpen(false);
+            }
         }
         document.addEventListener('mousedown', closeSearchBar);
         document.addEventListener('mousedown', closeNav);
         return () => {
-          document.removeEventListener('mousedown', closeSearchBar);
-          document.removeEventListener('mousedown', closeNav);
+            document.removeEventListener('mousedown', closeSearchBar);
+            document.removeEventListener('mousedown', closeNav);
         }
-      })
+    })
 
     return (
         <nav className="bg-blue-500 p-4 sticky top-0 z-[9999]">
-            <div className="container mx-auto flex items-center justify-between">
+            <div className="max-w-6xl mx-auto flex items-center justify-between">
                 <Link to={'/'} className="text-white font-semibold text-2xl">
                     Zone<span className='text-orange-400'>kart</span>
                 </Link>
-                <div className={`absolute top-20 left-0 min-[789px]:static min-[789px]:flex ${isOpenSearch ? 'flex' : 'hidden'} justify-center w-full`}>
+                <div className={`absolute top-20 left-0 min-[900px]:static min-[900px]:flex ${isOpenSearch ? 'flex' : 'hidden'} justify-center w-full`}>
                     <div ref={searchInputBoxRef} className="flex items-center border-2 rounded-md">
                         <input
                             type="text"
@@ -70,7 +81,7 @@ const Navbar = () => {
                         </button>
                     </div>
                 </div>
-                <div className='flex gap-8 min-[789px]:hidden'>
+                <div className='flex gap-8 min-[900px]:hidden'>
                     <div>
                         {isOpenSearch ?
                             <FaTimes onClick={handleSearchShowHide} color='#fff' size={25} />
@@ -79,10 +90,10 @@ const Navbar = () => {
                         }
                     </div>
                     <div ref={barRef}>
-                    <FaBars onClick={handleNavbarShowHide} color='#fff' size={20} />
+                        <FaBars onClick={handleNavbarShowHide} color='#fff' size={20} />
                     </div>
                 </div>
-                <ul ref={navRef} className={`max-[789px]:w-full gap-5 max-[789px]:gap-2 max-[789px]:bg-blue-500 max-[789px]:px-10 max-[789px]:absolute top-16 left-0 right-0 min-[789px]:static ${isOpen ? 'flex' : 'hidden'} min-[789px]:flex max-[789px]:flex-col max-[789px]:justify-center text-lg`}>
+                <ul ref={navRef} className={`max-[900px]:w-full max-[900px]:pb-4 gap-5 max-[900px]:gap-2 max-[900px]:bg-blue-500 max-[900px]:px-10 max-[900px]:absolute top-16 left-0 right-0 min-[900px]:static ${isOpen ? 'flex' : 'hidden'} min-[900px]:flex max-[900px]:flex-col items-center max-[900px]:justify-center text-lg`}>
                     <Link to={'/'}>
                         <li className={`${pathname === '/' ? 'text-white' : 'text-gray-300'}`}>Home</li>
                     </Link>
@@ -95,6 +106,7 @@ const Navbar = () => {
                     <Link to={'/cart'}>
                         <li className={`${pathname === '/cart' ? 'text-white' : 'text-gray-300'}`}>Cart</li>
                     </Link>
+                    {isLogin && <button onClick={handleLogout} className='bg-white text-blue-500 w-24 px-2 py-1 rounded max-[900px]:mb-6' >logout</button>}
                 </ul>
             </div>
         </nav>
