@@ -1,16 +1,16 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import ProjectListingPage from "./components/ProductListingPage"
-import Navbar from "./components/Navbar"
-import Category from "./components/Category"
-import Cart from "./components/Cart"
-import ProductDetail from "./components/ProductDetail"
-import Context from "./context/Context"
-import { ToastContainer } from "react-toastify"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ProjectListingPage from "./pages/ProductListingPage";
+import Navbar from "./components/Navbar";
+import Category from "./pages/Category";
+import Cart from "./pages/Cart";
+import ProductDetail from "./pages/ProductDetail";
+import Context from "./context/Context";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Footer from "./components/Footer"
-import SearchPage from "./components/SearchPage"
-import Home from "./components/Home"
-import SignIn from "./components/SignIn"
+import Footer from "./components/Footer";
+import SearchPage from "./pages/SearchPage";
+import Home from "./pages/Home";
+import SignIn from "./pages/SignIn";
 
 function App() {
   return (
