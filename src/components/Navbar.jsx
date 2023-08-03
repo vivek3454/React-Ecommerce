@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaBars, FaSearch, FaTimes } from 'react-icons/fa';
+import { FaBars, FaSearch, FaTimes, FaShoppingCart } from 'react-icons/fa';
 import { AppContext } from '../context/Context';
 
 const Navbar = () => {
     const { pathname } = useLocation();
     const navigate = useNavigate();
-    const { isLogin, setIsLogin } = useContext(AppContext);
+    const { isLogin, setIsLogin, cart, setCart } = useContext(AppContext);
     const searchInputBoxRef = useRef();
     const navRef = useRef();
     const barRef = useRef();
@@ -31,6 +31,7 @@ const Navbar = () => {
         if (userinput === 'y') {
             sessionStorage.clear();
             setIsLogin(false);
+            setCart([]);
             navigate('/signin');
         }
     }
@@ -103,8 +104,9 @@ const Navbar = () => {
                     <Link to={'/category'}>
                         <li className={`${pathname === '/category' ? 'text-white' : 'text-gray-300'}`}>Category</li>
                     </Link>
-                    <Link to={'/cart'}>
-                        <li className={`${pathname === '/cart' ? 'text-white' : 'text-gray-300'}`}>Cart</li>
+                    <Link to={'/cart'} className='relative'>
+                        <li className={`${pathname === '/cart' ? 'text-white' : 'text-gray-300'}`}><FaShoppingCart /></li>
+                        {cart.length > 0 && <span className='absolute -top-2 -right-2 bg-white rounded-full w-[14px] h-[14px] font-mono text-sm flex justify-center items-center'>{cart.length}</span>}
                     </Link>
                     {isLogin && <button onClick={handleLogout} className='bg-white text-blue-500 w-24 px-2 py-1 rounded max-[900px]:mb-6' >logout</button>}
                 </ul>
