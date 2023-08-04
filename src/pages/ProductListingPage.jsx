@@ -14,6 +14,7 @@ const ProjectListingPage = () => {
     const [currentValue, setCurrentValue] = useState(0);
     const [hoverValue, setHoverValue] = useState(undefined);
     const [checkboxShowHide, setCheckboxShowHide] = useState({ categoryCheckbox: false, brandsCheckbox: false });
+    const [value, setValue] = useState('');
     const stars = Array(5).fill(0);
     const filterRef = useRef();
     const filterBtnRef = useRef();
@@ -42,20 +43,25 @@ const ProjectListingPage = () => {
     }
 
     const handleSort = (e) => {
-        let value = e.target.value;
+        setValue(e.target.value);
+    }
+    
+    useEffect(() => {
+        
         if (value === 'low-high') {
             let sorted = products.sort((a, b) => {
                 return Math.floor(a.price - b.price);
             })
             setProducts([...sorted]);
         }
-        else {
+        else if (value === 'high-low') {
             let sorted = products.sort((a, b) => {
                 return Math.floor(b.price - a.price);
             })
             setProducts([...sorted]);
         }
-    }
+    }, [value, products])
+    
 
     const handleFilterOpen = () => {
         setIsFilterOpen(!isFilterOpen);
@@ -86,6 +92,7 @@ const ProjectListingPage = () => {
         setCurrentValue(0);
         setAllBrands([]);
         setAllCategories([]);
+        setValue('select')
     }
 
 
@@ -188,8 +195,8 @@ const ProjectListingPage = () => {
 
 
     return (
-        <main className='flex'>
-            <aside ref={filterRef} className={`min-w-[20%] pl-10 max-[980px]:pl-2 max-[980px]:w-40 min-[980px]:block ${isFilterOpen ? 'block' : 'hidden'} py-10 max-[980px]:absolute max-[980px]:top-[145px] max-[980px]:h-96 max-[980px]:left-8 z-50 bg-white overflow-auto max-[980px]:shadow-lg max-[980px]:border-0 h-full`}>
+        <main className='flex border-b-2 border-[#ccc]'>
+            <aside ref={filterRef} className={`min-w-[20%] pl-10 max-[980px]:pl-2 max-[980px]:w-40 min-[980px]:block ${isFilterOpen ? 'block' : 'hidden'} py-10 max-[980px]:absolute max-[980px]:top-[145px] max-[980px]:h-96 max-[980px]:left-8 z-50 bg-white overflow-auto max-[980px]:shadow-lg max-[980px]:border-0 h-[90vh] border-r-2 border-[#ccc] sticky top-[75px] `}>
                 <h2 className='text-2xl font-semibold mb-3 border-b-2 py-2'>Filter</h2>
                 <h3 className='text-lg -mb-4 font-mono'>Rating</h3>
                 <ul className='flex gap-3 mt-1 py-5 border-b-2'>
@@ -247,13 +254,13 @@ const ProjectListingPage = () => {
                 </div>
                 <button onClick={handleFiltersReset} className='font-mono border border-black rounded px-2 mt-5'>Reset</button>
             </aside>
-            <section className='w-[85%] px-4 max-[1080px]:w-full h-full border-l-2 border-[#ccc] overflow-y-auto'>
+            <section className='w-[85%] px-4 max-[1080px]:w-full h-full overflow-y-auto'>
                 <div className='flex justify-end max-[980px]:justify-between sticky top-0 bg-white z-10 px-[36px] py-7'>
 
                     <div onClick={handleFilterOpen} className='min-[980px]:hidden' ref={filterBtnRef}>
                         <button className='bg-blue-500 hover:bg-blue-600 px-2 py-1 rounded text-white'>Filter</button>
                     </div>
-                    <select onChange={handleSort} defaultValue={'select'} className='ml-3 border-2 border-black'>
+                    <select onChange={handleSort} value={value} defaultValue={'select'} className='ml-3 border-2 border-black'>
                         <option value="select">Price</option>
                         <option value="low-high">lowest to highest</option>
                         <option value="high-low">highest to lowest</option>
