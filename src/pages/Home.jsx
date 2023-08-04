@@ -7,9 +7,9 @@ const Home = () => {
         <div className='pt-1 container mx-auto'>
             <div className="lg:grid lg:grid-cols-2 lg:h-[calc(100vh-90px)] items-center justify-between home flex flex-col-reverse mt-5 lg:mt-0 gap-4 lg:gap-0">
                 <div className="flex flex-col gap-4 md:gap-8 items-center lg:items-start md:ms-7">
-                    <p className="text-black text-4xl md:text-7xl font-bold text-center lg:text-left ">
+                    <h1 className="text-black text-4xl md:text-7xl font-bold text-center lg:text-left ">
                     Get the Best Products!
-                    </p>
+                    </h1>
                     <p className="text-lg md:text-3xl font-medium text-center lg:text-left w-[80%]">
                     FROM OUR STORE
                     </p>

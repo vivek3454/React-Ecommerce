@@ -21,7 +21,7 @@ const SearchPage = () => {
 
 
     return (
-        <>
+        <section>
             <div className='min-[1000px]:container mx-auto max-[980px]:gap-10 max-[1280px]:gap-20 px-4 pt-8 grid place-items-center max-[550px]:grid-cols-1 max-[780px]:grid-cols-2 max-[1050px]:grid-cols-3 grid-cols-4 shrink-0 flex-wrap'>
                 {
                     productsArr.length !== 0 &&
@@ -44,9 +44,9 @@ const SearchPage = () => {
             </div>
             {
                 productsArr.length === 0 &&
-                <div className='h-[70vh] flex px-5 justify-center items-center text-xl font-semibold'>Nothing to show here for your search result</div>
+                <p className='h-[70vh] flex px-5 justify-center items-center text-xl font-semibold'>Nothing to show here for your search result</p>
             }
-        </>
+        </section>
     )
 }
 

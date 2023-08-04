@@ -7,7 +7,7 @@ const Category = () => {
 
   return (
     <>
-      <div className='bg-white min-[375px]:px-10 max-[375px]:px-5'>
+      <section className='bg-white min-[375px]:px-10 max-[375px]:px-5'>
         {
           categories.map((category) => {
             return (
@@ -21,7 +21,7 @@ const Category = () => {
           })
         }
 
-      </div>
+      </section>
     </>
   )
 }

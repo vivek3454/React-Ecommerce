@@ -24,20 +24,20 @@ const ProductCard = ({ category, discount, id, image, price, rating, title }) =>
                 </div>
             </Link>
             <div className="mt-4">
-                <h3 className="text-gray-500 flex justify-between text-xs tracking-widest title-font mb-1">
-                    {category}
-                    <p className='flex gap-1'>
+                <p className="text-gray-500 flex justify-between text-xs tracking-widest title-font mb-1">
+                    <span>{category}</span>
+                    <span className='flex gap-1'>
                         <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-green-700" viewBox="0 0 24 24">
                             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                         </svg>
                         {rating}
-                    </p>
-                </h3>
-                <h2 className="text-gray-900 title-font text-lg line-clamp-1 font-medium">{title}</h2>
-                <p className="mt-4 flex justify-between items-center">
-                    ${price}
-                    <button onClick={handleAddToCart} className='bg-blue-500 hover:shadow-xl px-2 py-1 rounded text-white'>Add to Cart</button>
+                    </span>
                 </p>
+                <h2 className="text-gray-900 title-font text-lg line-clamp-1 font-medium">{title}</h2>
+                <div className="mt-4 flex justify-between items-center">
+                    <p>${price}</p>
+                    <button onClick={handleAddToCart} className='bg-blue-500 hover:shadow-xl px-2 py-1 rounded text-white'>Add to Cart</button>
+                </div>
             </div>
         </div>
         </>

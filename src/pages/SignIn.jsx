@@ -32,7 +32,7 @@ const SignIn = () => {
     return (
         <section className="w-full h-screen px-2 flex justify-center items-center">
             <div className="border-2 rounded p-8 w-96">
-                <form action="" >
+                <form>
                     <h2 className="text-gray-900 text-3xl font-bold text-center mb-5">Login</h2>
                     <div className="relative mb-4">
                         <label htmlFor="email" className='font-semibold'>email</label>

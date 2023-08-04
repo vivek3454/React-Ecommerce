@@ -75,12 +75,12 @@ const Cart = () => {
 
 
   return (
-    <>
+    <section>
       {isLogin &&
         (cart.length !== 0 ?
           <div className='pb-24 pl-5 h-[75vh] container mx-auto '>
 
-            <div className='flex flex-col h-[60vh] overflow-auto'>
+            <ul className='flex flex-col h-[60vh] overflow-auto'>
               {
                 cart.length !== 0 && cart.map((product, index) => (
                   <CartItem
@@ -101,25 +101,24 @@ const Cart = () => {
                   />
                 ))
               }
-            </div>
+            </ul>
             <div className='w-full flex justify-end'>
               <div className='w-60 p-5'>
                 <p className='font-semibold text-lg'>SubTotal : {subTotal}$</p>
                 <p className='font-semibold text-lg'>Tax : 20$</p>
                 <p className='font-semibold text-lg'>Total : {subTotal === 0 ? 0 : subTotal + 20}$</p>
                 <button className='w-28 h-8 bg-black text-white rounded-md hover:bg-gray-600 text-lg' onClick={checkOutHandler}>Checkout</button>
-
               </div>
             </div>
           </div>
           :
           <div className=' h-[78vh] flex flex-col items-center justify-center'>
-            <h1 className='font-semibold text-2xl'>Cart is empty</h1>
+            <p className='font-semibold text-2xl'>Cart is empty</p>
             <Link to='/products' className='text-sky-500 flex gap-3'>Go to Shop <FaArrowRight className='mt-[5px]' /></Link>
           </div>
         )
       }
-    </>
+    </section>
   )
 
 }
