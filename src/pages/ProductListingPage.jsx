@@ -1,13 +1,11 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ProductCard from '../components/ProductCard';
-import { AppContext } from '../context/Context';
-import { product } from '../data/products';
+import { product } from '../data/Products';
 import { categories } from '../data/categories';
 import { brands } from '../data/brands';
 import { FaStar, FaAngleDown } from 'react-icons/fa';
-
 const ProjectListingPage = () => {
-    const { products, setProducts } = useContext(AppContext);
+    const [allProducts, setAllProducts] = useState(product);
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [allBrands, setAllBrands] = useState([]);
     const [allCategories, setAllCategories] = useState([]);
@@ -42,26 +40,30 @@ const ProjectListingPage = () => {
         }
     }
 
-    const handleSort = (e) => {
+    const handleSortOption = (e) => {
         setValue(e.target.value);
     }
-    
-    useEffect(() => {
-        
+
+    const handleSort = (arr) => {
+        let sorted = [];
         if (value === 'low-high') {
-            let sorted = products.sort((a, b) => {
+            sorted = [...arr].sort((a, b) => {
                 return Math.floor(a.price - b.price);
             })
-            setProducts([...sorted]);
+            setAllProducts(sorted);
         }
         else if (value === 'high-low') {
-            let sorted = products.sort((a, b) => {
+            sorted = [...arr].sort((a, b) => {
                 return Math.floor(b.price - a.price);
             })
-            setProducts([...sorted]);
+            setAllProducts(sorted);
         }
-    }, [value, products])
-    
+    }
+
+    useEffect(() => {
+        handleSort(allProducts);
+    }, [value])
+
 
     const handleFilterOpen = () => {
         setIsFilterOpen(!isFilterOpen);
@@ -88,21 +90,21 @@ const ProjectListingPage = () => {
     }
 
     const handleFiltersReset = () => {
-        setProducts(product);
         setCurrentValue(0);
+        setValue('select')
         setAllBrands([]);
         setAllCategories([]);
-        setValue('select')
+        setAllProducts(product);
     }
 
 
     useEffect(() => {
         let filteredCards = [];
-        
+
         if (allBrands.length !== 0) { // if brand is selected
             if (allCategories.length !== 0) { // if brand , category is selected
                 if (currentValue > 0) { // if brand , category , rating is selected
-
+                    
                     for (const selectedOption of allCategories) {
                         for (const singleBrand of allBrands) {
                             let Cards = product.filter((item) => {
@@ -125,7 +127,7 @@ const ProjectListingPage = () => {
             }
             else { // if brand is selected and category is not selected
                 if (currentValue > 0) { // if brand , rating is selected and category is not selected
-
+                    
                     for (const singleBrand of allBrands) {
                         let Cards = product.filter((item) => {
                             return item.brand === singleBrand && item.rating <= currentValue;
@@ -140,15 +142,15 @@ const ProjectListingPage = () => {
                         });
                         filteredCards = [...filteredCards, ...Cards];
                     }
-
+                    
                 }
             }
-            setProducts(filteredCards);
+            setAllProducts(filteredCards);
         }
         else { // if brand is not selected
             if (allCategories.length !== 0) { // if category is selected and brand is not selected
                 if (currentValue > 0) { // if category , rating is selected and brand is not selected
-
+                    
                     for (const selectedOption of allCategories) {
                         let Cards = product.filter((item) => {
                             return item.category === selectedOption && item.rating <= currentValue;
@@ -164,21 +166,27 @@ const ProjectListingPage = () => {
                         filteredCards = [...filteredCards, ...Cards];
                     }
                 }
-                setProducts(filteredCards);
+                setAllProducts(filteredCards);
             }
             else { // if rating is selected and brand, category is not selected
                 if (currentValue > 0) {
                     const filteredProduct = product.filter((item) => {
                         return item.rating <= currentValue;
                     })
-                    setProducts(filteredProduct);
+                    setAllProducts(filteredProduct);
                 }
                 else { // if nothing is selected
-                    setProducts(product);
+                    setAllProducts(product);
                 }
             }
         }
+        handleSort(filteredCards);
     }, [allBrands, allCategories, currentValue])
+    
+    useEffect(() => {
+        
+    }, [allBrands, allCategories, currentValue])
+    
 
 
     useEffect(() => {
@@ -260,17 +268,20 @@ const ProjectListingPage = () => {
                     <div onClick={handleFilterOpen} className='min-[980px]:hidden' ref={filterBtnRef}>
                         <button className='bg-blue-500 hover:bg-blue-600 px-2 py-1 rounded text-white'>Filter</button>
                     </div>
-                    <select onChange={handleSort} value={value} defaultValue={'select'} className='ml-3 border-2 border-black'>
-                        <option value="select">Price</option>
-                        <option value="low-high">lowest to highest</option>
-                        <option value="high-low">highest to lowest</option>
-                    </select>
+                    <div className="flex items-center">
+                        price :
+                        <select onChange={handleSortOption} value={value} className='ml-1 border-2 border-black'>
+                            <option value="select">default</option>
+                            <option value="low-high">lowest to highest</option>
+                            <option value="high-low">highest to lowest</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div className='pb-24 pt-5 grid justify-items-center gap-5 grid-cols-[repeat(auto-fit,minmax(250px,1fr))]'>
                     {
-                        products.length > 0 ?
-                            products.map((product) => (
+                        allProducts.length > 0 ?
+                            allProducts.map((product) => (
                                 <ProductCard
                                     key={product.id}
                                     category={product.category}
