@@ -16,11 +16,11 @@ const ProductCard = ({ category, discount, id, image, price, rating, title }) =>
 
     return (
         <>
-        <div className="flex flex-col m-4 border-2 w-64 p-4 relative">
+        <div className="flex flex-col m-4 border-2 w-64 p-4 relative hover:shadow-lg transition-all">
             {discount && <span className='text-black text-sm bg-yellow-400 rounded px-1 absolute top-1 right-1'>{discount}% off</span>}
             <Link to={`/detail/${id}`}>
                 <div className="flex justify-center rounded">
-                    <img alt="ecommerce" className="object-contain w-40 h-40" src={image} />
+                    <img alt="ecommerce" className="object-contain w-60 h-40" src={image} />
                 </div>
             </Link>
             <div className="mt-4">
