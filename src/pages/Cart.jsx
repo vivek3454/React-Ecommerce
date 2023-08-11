@@ -2,13 +2,11 @@ import { useContext, useEffect } from 'react';
 import { AppContext } from '../context/Context';
 import { FaArrowRight } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import CartItem from '../components/CartItem';
 
 const Cart = () => {
   const { cart, setCart, subTotal, setSubTotal, isLogin, setIsLogin } = useContext(AppContext);
-  const navigate = useNavigate();
-
   const decrement = ( index) => {
     const product = cart[index];
     if (product.quantity === 1) {
@@ -28,8 +26,6 @@ const Cart = () => {
     setSubTotal(productQty.itemTotal);
   }
 
-
-
   useEffect(() => {
     let allTotal = 0;
     for (const product of cart) {
@@ -38,19 +34,6 @@ const Cart = () => {
     setSubTotal(allTotal);
   }, [cart])
 
-  const deleteHandler = (id) => {
-    const product = cart.filter((product) => product.id !== id);
-    setCart(product);
-    toast.success("Successfull removed from Cart.", {
-      position: "top-center",
-      autoClose: 1500,
-      hideProgressBar: true,
-      closeOnClick: false,
-      pauseOnHover: false,
-      draggable: false,
-      theme: "light",
-    });
-  }
   const checkOutHandler = () => {
     toast.success("Successfull Checkout done.", {
       position: "top-center",
@@ -63,16 +46,6 @@ const Cart = () => {
     });
     setCart([]);
   }
-
-  useEffect(() => {
-    let value = sessionStorage.getItem('isLogin');
-    setIsLogin(value);
-    if (!value) {
-      navigate('/signin');
-    }
-  }, [])
-  
-
 
   return (
     <section>
@@ -97,7 +70,6 @@ const Cart = () => {
                     itemTotal={product.itemTotal}
                     decrement={decrement}
                     increment={increment}
-                    deleteHandler={deleteHandler}
                   />
                 ))
               }

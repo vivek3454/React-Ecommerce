@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaTrash } from 'react-icons/fa';
+import { AppContext } from '../context/Context';
 
-const CartItem = ({ itemTotal, id, image, price, title, quantity, decrement, increment, index, deleteHandler }) => {
+
+const CartItem = ({ itemTotal, id, image, price, title, quantity, decrement, increment, index }) => {
+  const {deleteHandler} = useContext(AppContext)
   return (
     <li className='bg-white border-b-2 border-black rounded-[4px] my-8 px-4 grid grid-cols-[2fr_1fr_1fr_2fr] max-[820px]:grid-cols-[2fr_1fr_1fr_1fr] max-[420px]:grid-cols-2 items-center'>
       <div className='flex items-center justify-center gap-3 max-[600px]:flex-col max-[450px]:gap-0'>
